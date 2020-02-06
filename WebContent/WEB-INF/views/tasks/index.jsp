@@ -9,12 +9,12 @@
                     <a href="${pageContext.request.contextPath}/show?id=${task.id}">
                         <c:out value="${task.id}" />
                     </a>
-                    ：<c:out value="${task.content}"></c:out>
+                    ：<c:out value="${task.title}"></c:out> &gt; <c:out value="${task.content}" />
                 </li>
             </c:forEach>
         </ul>
 
-        <p><a href="${pageContext.request.contextPath}/new">新規タスク登録</a></p>
+        <p><a href="${pageContext.request.contextPath}/new">新規タスクの追加</a></p>
 
     </c:param>
 </c:import>
