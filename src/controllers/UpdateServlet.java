@@ -38,7 +38,7 @@ public class UpdateServlet extends HttpServlet {
 
             Task t = em.find(Task.class, (Integer)(request.getSession().getAttribute("task_id")));
 
-            // フォームの内容を各プロパティに上書き
+
             String title = request.getParameter("title");
             t.setTitle(title);
 
@@ -46,17 +46,15 @@ public class UpdateServlet extends HttpServlet {
             t.setContent(content);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            t.setUpdated_at(currentTime);       // 更新日時のみ上書き
+            t.setUpdated_at(currentTime);
 
-            // データベースを更新
             em.getTransaction().begin();
             em.getTransaction().commit();
+            request.getSession().setAttribute("flush", "更新が完了しました。");
             em.close();
 
-            // セッションスコープ上の不要になったデータを削除
             request.getSession().removeAttribute("task_id");
 
-            // indexページへリダイレクト
             response.sendRedirect(request.getContextPath() + "/index");
         }
     }
